@@ -27,11 +27,13 @@ let baseMaps = {
 
 // Create the earthquake layer for our map.
 let earthquakes = new L.layerGroup();
+let tectonicplates = new L.layerGroup();
 
 // We define an object that contains the overlays.
 // This overlay will be visible all the time.
 let overlays = {
-  Earthquakes: earthquakes
+  Earthquakes: earthquakes,
+  TectonicPlates: tectonicplates
 };
 
 // Create the map object with center, zoom level and default layer.
@@ -119,6 +121,24 @@ style: styleInfo,
 
   // Then we add the earthquake layer to our map.
   earthquakes.addTo(map);
+  });
+
+let myStyle = {
+  color: 'blue',
+  weight: 3,
+  opacity: 4
+}
+
+// Retrieve the tetontic GeoJSON data.
+d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
+  console.log(data);
+// Creating a GeoJSON layer with the retrieved data.
+L.geoJson(data, {
+  style: myStyle
+}).addTo(tectonicplates);
+
+  // Then we add the earthquake layer to our map.
+  tectonicplates.addTo(map);
   });
 
   //var legend = L.control({position: 'bottomright'});
