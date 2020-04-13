@@ -124,7 +124,7 @@ style: styleInfo,
   });
 
 let myStyle = {
-  color: 'blue',
+  color: 'orange',
   weight: 3,
   opacity: 4
 }
